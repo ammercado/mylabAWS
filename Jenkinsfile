@@ -23,14 +23,22 @@ pipeline{
             }
         }
 
-         // Stage3 : Deploying
-         stage ('Deploy'){
+         // Stage3 : Public the artefacts to nexus
+         stage ('Public to Nexus'){
             steps {
-                echo ' deploying......'
+               nexusArtifactUploader artifacts: [[artifactId: 'VinayDevOpsLab', classifier: '', file: 'target/VinayDevOpsLab-0.0.4-SNAPSHOT.war', type: 'war']], credentialsId: '48f4b7b6-44d0-4b5c-b536-7225f45da704', groupId: 'com.vinaysdevopslab', nexusUrl: '172.20.10.142:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'VinaysDevOpsLab-SNAPSHOT', version: '0.0.4-SNAPSHOT'
 
             }
         }
 
+       // Stage3 : Deploying
+        // stage ('Deploy'){
+        //    steps {
+          //      echo ' deploying......'
+
+          //  }
+       // }
+        
         // Stage3 : Publish the source code to Sonarqube
        // stage ('Sonarqube Analysis'){
         //    steps {
